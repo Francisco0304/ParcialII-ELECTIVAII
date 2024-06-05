@@ -1,11 +1,12 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const URI = "mongodb+srv://jairouptc:nyxmeR-zusjoz-8zubda@cluster0.9lfyrk5.mongodb.net/test"
+mongoose.connect('mongodb+srv://jairouptc:nyxmeR-zusjoz-8zubda@cluster0.9lfyrk5.mongodb.net/test');
 
-mongoose.set('strictQuery')
+const db = mongoose.connection;
 
-mongoose.connect(URI)
-  .then(()=> console.log('Connect Success...'))
-  .catch( err => console.log(err))
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Conexión exitosa a la base de datos.');
+});
 
-module.exports = mongoose
+module.exports = db;
