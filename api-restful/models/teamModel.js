@@ -1,13 +1,25 @@
 // teamModel.js
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const teamSchema = new mongoose.Schema({
-  name: String,
-  year: Number,
-  titles: Number,
-  city: String,
+const teamSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+},
+position: {
+    type: String,
+    required: true
+},
+age: {
+    type: Number,
+    required: true
+},
+team: {
+    type: Schema.Types.ObjectId,
+    ref: 'team'
+
+}
 });
 
-const Team = mongoose.model('Team', teamSchema);
-
-module.exports = Team;
+module.exports = mongoose.model('lugonzalezplayers', teamSchema);
